@@ -1,8 +1,14 @@
-# React + Vite
+# 📦 Frontend Hackthon 2023 - Passo a Passo de como instalar o projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Iniciando o projeto com o git
 
-Currently, two official plugins are available:
+1. Clone o repositório.
+2. Abra o terminal do VS Code.
+3. Digite os seguintes comandos no terminal:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   **Instalar as dependências && Para executar o projeto, você pode utilizar esses comandos:**
+   ```shell
+   npm install
+   npm run dev - Inicia a aplicação.
+
+4. Inicie o backend.
