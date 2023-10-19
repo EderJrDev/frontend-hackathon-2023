@@ -1,4 +1,5 @@
-import { lazy } from 'react';
+import { lazy } from "react";
+// import Signin from "../Pages/Auth/Signin";
 // import SignIn from '../pages/Authentication/SignIn';
 // import SignUp from '../pages/Authentication/SignUp';
 
@@ -7,32 +8,19 @@ import { lazy } from 'react';
 // const Profile = lazy(() => import('../pages/Profile'));
 // const Settings = lazy(() => import('../pages/Settings'));
 
+const Signin = lazy(() => import("../Pages/Auth/Signin"));
+
 const coreRoutes = [
   {
-    path: '/profile',
-    title: 'Profile',
-    component: 'teste',
+    path: "/profile",
+    title: "Profile",
+    component: Signin,
   },
-  // {
-  //   path: '/forms/form-elements',
-  //   title: 'Forms Elements',
-  //   component: FormElements,
-  // },
-  // {
-  //   path: '/settings',
-  //   title: 'Settings',
-  //   component: Settings,
-  // },
-  // {
-  //   path: '/signin',
-  //   title: 'SignIn',
-  //   component: SignIn,
-  // },
-  // {
-  //   path: '/signUp',
-  //   title: 'SignUp',
-  //   component: SignUp,
-  // },
+  {
+    path: "/calendar",
+    title: "Calendar",
+    component: Signin, // ou substitua por outro componente lazy
+  },
 ];
 
 const routes = [...coreRoutes];
