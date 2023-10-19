@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import Profile from '../Pages/Profile/Profile';
 // import SignIn from '../pages/Authentication/SignIn';
 // import SignUp from '../pages/Authentication/SignUp';
 
@@ -12,7 +11,7 @@ const coreRoutes = [
   {
     path: '/profile',
     title: 'Profile',
-    component: Profile,
+    component: 'teste',
   },
   // {
   //   path: '/forms/form-elements',
