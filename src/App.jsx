@@ -1,10 +1,11 @@
+import { Suspense, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Suspense, lazy, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import routes from "./routes";
-import Index from "./Pages/Dashboard/Index";
 import Loader from "./Loader/Loader";
+import Index from "./Pages/Dashboard/Index";
 import DefaultLayout from "./layouts/DefaultLayout";
+import Signin from "./Pages/Auth/Signin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ function App() {
         containerClassName="overflow-auto"
       />
       <Routes>
-        <Route path="/" element={<DefaultLayout />}>
+        <Route path="/" element={<Signin />}>
           <Route index element={<Index />} />
           {routes.map(({ path, component: Component }) => (
             <Route
