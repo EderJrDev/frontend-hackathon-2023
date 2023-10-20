@@ -1,12 +1,14 @@
 import { lazy } from "react";
+// import Index from "../Pages/Dashboard/Index";
 
 const Signin = lazy(() => import("../Pages/Auth/Signin"));
+const Index = lazy(() => import("../Pages/Dashboard/Index"));
 
 const coreRoutes = [
   {
     path: "/login",
     title: "login",
-    component: Signin,
+    component: Index,
   },
   {
     path: "/calendar",
