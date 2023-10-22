@@ -55,6 +55,8 @@ import Index from "./Pages/Dashboard/Index";
 import { useEffect, useState } from "react";
 import PageNotFound from "./layouts/PageNotFound";
 import { AuthProvider } from "./hooks/AuthContext";
+import LandingPage from "./Pages/LandingPage/Index";
+import Simulator from "./Pages/Simulator/Simulator";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -74,12 +76,14 @@ function App() {
           containerClassName="overflow-auto"
         />
         <Routes>
-          <Route path="/" element={<Signin />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/dashboard" element={<DefaultLayout />}>
             <Route index element={<Index />} />
-            <Route index element={<Index />} />
+          </Route>
+          <Route path="/simulator" element={<DefaultLayout />}>
+            <Route index element={<Simulator />} />
           </Route>
         </Routes>
       </AuthProvider>

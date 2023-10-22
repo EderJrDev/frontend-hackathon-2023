@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+// import React from "react";
 import DarkModeSwitcher from "./DarkModeSwitcher";
-import DropdownNotification from "./DropdownNotification";
-import DropdownMessage from "./DropdownMessage";
+// import DropdownNotification from "./DropdownNotification";
+// import DropdownMessage from "./DropdownMessage";
 import DropdownUser from "./DropdownUser";
 // import { Link } from "react-router-dom";
 // import Logo from "../images/logo/logo-icon.svg";
@@ -13,7 +13,7 @@ import DropdownUser from "./DropdownUser";
 
 const Header = (props) => {
   return (
-    <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-neutral-800 dark:drop-shadow-none">
+    <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-neutral-700 dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -65,7 +65,7 @@ const Header = (props) => {
         </div>
 
         <div className="hidden sm:block">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
+          {/* <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">
               <button className="absolute top-1/2 left-0 -translate-y-1/2">
                 <svg
@@ -97,7 +97,7 @@ const Header = (props) => {
                 className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
               />
             </div>
-          </form>
+          </form> */}
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">

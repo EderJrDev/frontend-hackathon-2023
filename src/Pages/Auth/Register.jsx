@@ -21,7 +21,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     setIsRegistered(true);
     try {
-      console.log(data);
+      // console.log(data);
       await api.post("user/", data);
       // console.log(response);
       toast.success("Conta criada com sucesso!");
@@ -33,15 +33,6 @@ const Register = () => {
       reset();
     }
   };
-
-  //  const goToLogin = () => {
-  //   const delayInMilliseconds = 500; // 3 segundos
-  //   setTimeout(() => {
-  //     console.log("Ação executada após 3 segundos."); // Esta mensagem será exibida após 3 segundos
-  //     // Coloque aqui o código que você deseja executar após o atraso
-  //   }, delayInMilliseconds);
-  //   setIsRegistered(true);
-  // };
 
   return (
     <div>
@@ -100,7 +91,6 @@ const Register = () => {
         <div className="w-full flex flex-col my-4">
           <button
             type="submit"
-            // onClick={() => setIsRegistered(true)}
             className="w-full text-white mt-2 font-semibold bg-[#060606] rounded-md p-4 text-center justify-center"
           >
             Criar Conta
