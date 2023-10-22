@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { api } from "../../utils/api";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import Modal from "../../components/Modal";
-import secureLocalStorage from "react-secure-storage";
+// import toast, { Toaster } from "react-hot-toast";
+// import Modal from "../../components/Modal";
+// import secureLocalStorage from "react-secure-storage";
 import { Lightbulb, PaperPlaneTilt, SealCheck, X } from "@phosphor-icons/react";
 import { Warning } from "postcss";
 
@@ -13,24 +13,17 @@ import cardThree from "../../assets/card-3.jpg";
 import cardFour from "../../assets/card-3.png";
 import cardFive from "../../assets/card-4.jpg";
 import cardLight from "../../assets/bg-2.jpg";
-import Spinner from "../../components/Spinner";
+// import Spinner from "../../components/Spinner";
 
 const Simulator = () => {
   const {
     register,
     handleSubmit,
-    reset: resetFilter,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const {
-    register: registerPassword,
-    reset: resetPassword,
-    handleSubmit: handlePassword,
-    formState: { errors: errorsPassword },
-  } = useForm();
-
-  const notify = () => toast.error("Você já possui cadastro!");
+  // const notify = () => toast.error("Você já possui cadastro!");
 
   // toast.success(
   //   "Dados inválidos por favor verifique suas informações e tente novamente."
@@ -38,89 +31,67 @@ const Simulator = () => {
 
   const [selecao, setSelecao] = useState("");
   const [response, setResponse] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [showForm, setShowForm] = useState(true);
 
   const [filter, setfilter] = useState(null);
 
   const onSubmit = async (data) => {
     try {
-      setIsOpen(true);
-      // setIsOpen(true);
-      // console.log(isOpen);
       console.log(data);
 
       setfilter(data);
 
-      // setSelecao(data.nivel);
+      setSelecao(data.nivel);
 
       // const response = await api.post("energia/calculate", data);
       // console.log(response);
-      resetFilter();
+
+      const response = await api.post("energia/calculate", data);
+      console.log(response);
+      setResponse(response.data);
+      setShowForm(false);
+      reset();
       // notify();
-      // const token = response.data.token;
-      // secureLocalStorage.setItem("token", token);
-      // setSelecao(selecao);
-      // navigate("/dashboard");
+      // setSelecao(true);
     } catch (e) {
       // console.log(e);
       // notify();
-      resetFilter();
-      setIsOpen(false);
+      // setShowForm(false);
+
+      reset();
     }
   };
 
-  const onSubmitPassword = async (data) => {
-    try {
-      setIsLoading(true);
-      const { password } = data;
-      // setIsOpen(true);
-      // console.log(isOpen);
-      console.log(data);
-      console.log(password);
+  // const onSubmitPassword = async (data) => {
+  //   try {
+  //     setIsLoading(true);
+  //     console.log(filter);
+  //     const response = await api.post("energia/calculate", filter);
+  //     console.log(response);
+  //     setResponse(response.data);
 
-      // setSelecao(data.nivel);
-
-      const infos = secureLocalStorage.getItem("ClientsInfo");
-
-      infos.password = password;
-
-      console.log(infos);
-
-      const createAccount = await api.post("user", infos);
-      console.log(createAccount);
-      // reset();
-      // notify();
-
-      console.log(filter);
-      const response = await api.post("energia/calculate", filter);
-      console.log(response);
-
-      setResponse(response.data);
-
-      // toast(
-      //   response.data,
-      //   {
-      //     duration: 6000,
-      //   }
-      // );
-      // const token = response.data.token;
-      // secureLocalStorage.setItem("token", token);
-      // setSelecao(selecao);
-      // navigate("/dashboard");
-      setSelecao(filter.nivel);
-      setIsLoading(false);
-      setShowForm(false);
-      setIsOpen(false);
-      resetPassword();
-    } catch (e) {
-      console.log(e);
-      notify();
-      setIsOpen(false);
-      resetPassword();
-    }
-  };
+  //     // toast(
+  //     //   response.data,
+  //     //   {
+  //     //     duration: 6000,
+  //     //   }
+  //     // );
+  //     // const token = response.data.token;
+  //     // secureLocalStorage.setItem("token", token);
+  //     // setSelecao(selecao);
+  //     // navigate("/dashboard");
+  //     setSelecao(filter.nivel);
+  //     setIsLoading(false);
+  //     setShowForm(false);
+  //     setIsOpen(false);
+  //     resetPassword();
+  //   } catch (e) {
+  //     console.log(e);
+  //     notify();
+  //     setIsOpen(false);
+  //     resetPassword();
+  //   }
+  // };
 
   const solucoesEnergia = {
     simples: {
@@ -186,45 +157,9 @@ const Simulator = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <h2 className="text-2xl font-bold mb-4">Crie sua senha</h2>
-        <div className="w-full flex flex-col mb-2">
-          <h1 className="text-start">
-            Estamos realizando a simulação, enquanto isso crie sua senha no
-            sistema:
-          </h1>
-          <form onSubmit={handlePassword(onSubmitPassword)}>
-            <div className="text-start">
-              <input
-                type="password"
-                {...registerPassword("password", { required: true })}
-                autoFocus
-                placeholder="Senha"
-                className="w-full text-black py-4 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-              />
-              {errorsPassword.password && (
-                <span className="text-red-500">Senha é Obrigatória.</span>
-              )}
-            </div>
-            <button
-              // onClick={() => setIsOpen(false)}
-              className="bg-[#00df9a] w-[200px] rounded-md font-medium mt-6 mx-auto px-6 py-3"
-            >
-              {isLoading ? <Spinner /> : "Salvar"}
-            </button>
-          </form>
-        </div>
-        {/* <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => setIsOpen(false)}
-        >
-          Abrir Modal
-        </button> */}
-      </Modal>
       {/* notification  */}
-      <Toaster position="top-right" reverseOrder={false} />
+      {/* <Toaster position="top-right" reverseOrder={false} /> */}
       {/* notification  */}
-
       <div>
         <h1 className="pb-5 text-xl">
           {showForm ? (
@@ -399,14 +334,11 @@ const Simulator = () => {
                   href="#"
                   className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
-                  <div className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg">
-                    <Lightbulb size={32} color="#00df9a" />
-                  </div>
-                  {/* <img
+                  <img
                     className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                     src={item.img}
-                    alt=""
-                  /> */}
+                    alt="image-system"
+                  />
                   <div className="flex flex-col justify-between p-4 leading-normal">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
                       {item.titulo}
@@ -435,7 +367,7 @@ const Simulator = () => {
                   <img
                     className="object-cover w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                     src={item.img}
-                    alt=""
+                    alt="image-system"
                   />
                   <div className="flex flex-col justify-between p-4 leading-normal">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
@@ -465,7 +397,7 @@ const Simulator = () => {
                   <img
                     className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg p-0 m-0"
                     src={item.img}
-                    alt=""
+                    alt="image-system"
                   />
                   <div className="flex flex-col justify-between p-4 leading-normal">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">

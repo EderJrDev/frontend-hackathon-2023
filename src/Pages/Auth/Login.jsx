@@ -30,7 +30,7 @@ const Login = () => {
       const token = response.data.token;
       secureLocalStorage.setItem("token", token);
 
-      navigate("/dashboard");
+      navigate("/simulator");
     } catch (e) {
       // console.log(e);
       notify();

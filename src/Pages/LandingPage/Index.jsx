@@ -14,11 +14,13 @@ import {
 } from "react-icons/fa";
 import Modal from "../../components/Modal";
 import { useForm } from "react-hook-form";
-import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 
 import dashboard from "../../assets/system.png";
 import { CurrencyDollar, GearSix, Note } from "@phosphor-icons/react";
+import { api } from "../../utils/api";
+
+import logo from "../../assets/Eco.png";
 
 const LandingPage = () => {
   const [nav, setNav] = useState(false);
@@ -58,7 +60,10 @@ const LandingPage = () => {
   const onSubmit = async (data) => {
     // setIsRegistered(true);
     try {
-      secureLocalStorage.setItem("ClientsInfo", data);
+      // secureLocalStorage.setItem("ClientsInfo", data);
+
+      await api.post("user", data);
+      // console.log(createAccount);
 
       navigate("/simulator");
     } catch (e) {
@@ -101,6 +106,18 @@ const LandingPage = () => {
                 <span className="text-red-500">Senha Obrigatória.</span>
               )}
             </div>
+            <div className="text-start">
+              <input
+                type="password"
+                {...register("password", { required: true })}
+                autoFocus
+                placeholder="Senha"
+                className="w-full text-black py-4 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+              />
+              {errors.password && (
+                <span className="text-red-500">Senha é Obrigatória.</span>
+              )}
+            </div>
             <button className="bg-[#00df9a] w-[200px] rounded-md font-medium mt-6 mx-auto px-6 py-3">
               Simular
             </button>
@@ -118,8 +135,9 @@ const LandingPage = () => {
       {/* end modal  */}
       {/* // NAVBAR */}
       <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
-        <h1 className="w-full text-3xl font-bold text-[#00df9a]">
-          EcoManager.
+        <h1 className="w-full flex p-0 m-auto text-3xl font-bold text-[#00df9a]">
+          <img src={logo} alt="logo" width={60} />
+          <span className="mt-3 mx-2">EcoManager</span>
         </h1>
         <ul className="hidden md:flex">
           <li className="p-4">
@@ -145,6 +163,12 @@ const LandingPage = () => {
               onClick={() => scrollToSection("contacts")}
             >
               Contato
+            </a>{" "}
+          </li>
+          <li className="p-4">
+            {" "}
+            <a className="cursor-pointer" onClick={() => navigate("login")}>
+              Login
             </a>{" "}
           </li>
         </ul>
@@ -231,7 +255,7 @@ const LandingPage = () => {
             </button>
           </div>
           <img
-            className="w-full md:w-2/3 mx-auto md:mx-0 my-4 mt-6 ml-5 md:order-last"
+            className="w-full px-4 md:w-2/3 mx-auto md:mx-0 my-4 mt-6 ml-5 md:order-last"
             src={dashboard}
             alt="/"
           />
@@ -246,7 +270,7 @@ const LandingPage = () => {
             <h2 className="text-2xl flex m-auto p-0 font-bold text-center">
               Feedbacks <Note size={32} className="mx-2" color="#00df9a" />
             </h2>
-            <p className="text-center text-4xl font-bold">PREMIUM</p>
+            <p className="text-center text-4xl font-bold">Premium</p>
             <div className="text-center font-medium">
               <p className="py-2 border-b mx-8 mt-8">Informações</p>
               <p className="py-2 border-b mx-8">Reputação</p>
@@ -283,7 +307,7 @@ const LandingPage = () => {
               Relatório de Gastos{" "}
               <CurrencyDollar size={32} className="mx-2" color="#00df9a" />
             </h2>
-            <p className="text-center text-4xl font-bold">PREMIUM</p>
+            <p className="text-center text-4xl font-bold">Premium</p>
             <div className="text-center font-medium">
               <p className="py-2 border-b mx-8 mt-8">Informações Completas</p>
               <p className="py-2 border-b mx-8">Planejamento</p>

@@ -31,7 +31,7 @@ const Signin = () => {
             Start for free and get exciting
           </p>
         </div> */}
-          <img src={bgLogin} alt="" className="w-full h-full object-cover" />
+          <img src={bgLogin} alt="image-system" className="w-full h-full object-cover" />
         </div>
 
         <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between">
