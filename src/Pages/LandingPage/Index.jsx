@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Typed from "react-typed";
 import "./index.css";
@@ -17,10 +17,30 @@ import { useForm } from "react-hook-form";
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 
+import dashboard from "../../assets/system.png";
+import { CurrencyDollar, GearSix, Note } from "@phosphor-icons/react";
+
 const LandingPage = () => {
   const [nav, setNav] = useState(false);
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const [scrollTo, setScrollTo] = useState(null);
+
+  const scrollToSection = (id) => {
+    setScrollTo(id);
+  };
+
+  // Efeito para rolar suavemente ao alterar o estado do scrollTo
+  useEffect(() => {
+    if (scrollTo) {
+      const element = document.getElementById(scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        // Limpar o estado após rolar suavemente
+        setScrollTo(null);
+      }
+    }
+  }, [scrollTo]);
 
   const handleNav = () => {
     setNav(!nav);
@@ -47,6 +67,10 @@ const LandingPage = () => {
       // reset();
     }
   };
+
+  const numeroWhatsapp = "16997328376";
+
+  const linkWhatsapp = `https://wa.me/55${numeroWhatsapp}`;
 
   return (
     <>
@@ -77,10 +101,7 @@ const LandingPage = () => {
                 <span className="text-red-500">Senha Obrigatória.</span>
               )}
             </div>
-            <button
-              // onClick={() => setIsOpen(false)}
-              className="bg-[#00df9a] w-[200px] rounded-md font-medium mt-6 mx-auto px-6 py-3"
-            >
+            <button className="bg-[#00df9a] w-[200px] rounded-md font-medium mt-6 mx-auto px-6 py-3">
               Simular
             </button>
           </form>
@@ -97,12 +118,35 @@ const LandingPage = () => {
       {/* end modal  */}
       {/* // NAVBAR */}
       <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
-        <h1 className="w-full text-3xl font-bold text-[#00df9a]">REACT.</h1>
+        <h1 className="w-full text-3xl font-bold text-[#00df9a]">
+          EcoManager.
+        </h1>
         <ul className="hidden md:flex">
-          <li className="p-4">Home</li>
-          <li className="p-4">Serviços</li>
-          {/* <li className="p-4">About</li> */}
-          <li className="p-4">Contato</li>
+          <li className="p-4">
+            {" "}
+            <a
+              className="cursor-pointer"
+              onClick={() => scrollToSection("home")}
+            >
+              Home
+            </a>{" "}
+          </li>
+          <li className="p-4">
+            <a
+              className="cursor-pointer"
+              onClick={() => scrollToSection("services")}
+            >
+              Serviços
+            </a>{" "}
+          </li>
+          <li className="p-4">
+            <a
+              className="cursor-pointer"
+              onClick={() => scrollToSection("contacts")}
+            >
+              Contato
+            </a>{" "}
+          </li>
         </ul>
         <div onClick={handleNav} className="block md:hidden">
           {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -150,70 +194,77 @@ const LandingPage = () => {
           <p className="md:text-2xl text-xl font-bold text-gray-500">
             Um sistema completo para a saúde ambiental da sua companhia!
           </p>
-          <button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black">
+          <a
+            href={linkWhatsapp}
+            target="_blank"
+            className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black"
+            rel="noreferrer"
+          >
             Saiba mais
-          </button>
+          </a>
         </div>
       </div>
       {/* // END HERO */}
 
       {/* // Analytics */}
-
-      <div className="w-full bg-white py-16 px-4">
-        <div className="max-w-[1240px] mx-auto grid md:grid-cols-2">
-          <img
-            className="w-[500px] mx-auto my-4"
-            //  src={Laptop}
-            alt="/"
-          />
-          <div className="flex flex-col justify-center">
-            <p className="text-[#00df9a] font-bold ">Dashboard Analítico</p>
+      <div id="home" className="w-full section bg-white py-16 px-4">
+        <div className="max-w-[1900px] mx-auto md:flex md:items-center">
+          <div className="md:w-2/3 mx-auto md:mx-0 px-3">
+            <p className="text-[#00df9a] font-bold">Dashboard Analítico</p>
             <h1 className="md:text-4xl sm:text-3xl text-2xl font-bold py-2">
               Saiba como está o consumo em sua empresa
             </h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatum molestiae delectus culpa hic assumenda, voluptate
-              reprehenderit dolore autem cum ullam sed odit perspiciatis.
-              Doloribus quos velit, eveniet ex deserunt fuga?
+            <p className="text-base">
+              A sustentabilidade empresarial é um conceito fundamental no
+              cenário atual de negócios, destacando-se como uma abordagem
+              estratégica para as organizações. No contexto da responsabilidade
+              social corporativa, a sustentabilidade implica em operar de
+              maneira economicamente viável, socialmente justa e ecologicamente
+              correta. Empresas sustentáveis consideram não apenas os lucros,
+              mas também o impacto de suas atividades no meio ambiente e na
+              sociedade.
             </p>
-            <button className="bg-black text-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto md:mx-0 py-3">
-              Começar
+            <button className="bg-black justify-center text-[#00df9a] w-[200px] rounded-md font-medium my-6 py-3">
+              <a target="_blank" href={linkWhatsapp} rel="noreferrer">
+                Começar
+              </a>
             </button>
           </div>
+          <img
+            className="w-full md:w-2/3 mx-auto md:mx-0 my-4 mt-6 ml-5 md:order-last"
+            src={dashboard}
+            alt="/"
+          />
         </div>
       </div>
-
       {/* // END  Analytics */}
 
       {/* CARDS  */}
-
-      <div className="w-full py-[10rem] px-4 bg-white">
+      <div id="services" className="w-full section py-[10rem] px-4 bg-white">
         <div className="max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8">
           <div className="w-full shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300">
-            <img
-              className="w-20 mx-auto mt-[-3rem] bg-white"
-              // src={Single}
-              alt="/"
-            />
-            <h2 className="text-2xl font-bold text-center py-8">Feedbacks</h2>
+            <h2 className="text-2xl flex m-auto p-0 font-bold text-center">
+              Feedbacks <Note size={32} className="mx-2" color="#00df9a" />
+            </h2>
             <p className="text-center text-4xl font-bold">PREMIUM</p>
             <div className="text-center font-medium">
               <p className="py-2 border-b mx-8 mt-8">Informações</p>
               <p className="py-2 border-b mx-8">Reputação</p>
               <p className="py-2 border-b mx-8">Transparência</p>
             </div>
-            <button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
+            <a
+              href={linkWhatsapp}
+              target="_blank"
+              className="bg-[#00df9a] w-[200px] text-center rounded-md font-medium my-6 mx-auto px-6 py-3"
+              rel="noreferrer"
+            >
               Saiba Mais
-            </button>
+            </a>
           </div>
           <div className="w-full shadow-xl bg-gray-100 flex flex-col p-4 md:my-0 my-8 rounded-lg hover:scale-105 duration-300">
-            <img
-              className="w-20 mx-auto mt-[-3rem] bg-transparent"
-              // src={Double}
-              alt="/"
-            />
-            <h2 className="text-2xl font-bold text-center py-8">Simulador</h2>
+            <h2 className="text-2xl flex m-auto p-0 font-bold text-center">
+              Simulador <GearSix size={32} className="mx-2" color="#00df9a" />
+            </h2>
             <p className="text-center text-4xl font-bold">Grátis</p>
             <div className="text-center font-medium">
               <p className="py-2 border-b mx-8 mt-8">Informações da Empresa</p>
@@ -228,13 +279,9 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="w-full shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300">
-            <img
-              className="w-20 mx-auto mt-[-3rem] bg-white"
-              // src={Triple}
-              alt="/"
-            />
-            <h2 className="text-2xl font-bold text-center py-8">
-              Relatório de Gastos
+            <h2 className="text-2xl flex m-auto p-0 font-bold text-center">
+              Relatório de Gastos{" "}
+              <CurrencyDollar size={32} className="mx-2" color="#00df9a" />
             </h2>
             <p className="text-center text-4xl font-bold">PREMIUM</p>
             <div className="text-center font-medium">
@@ -242,25 +289,29 @@ const LandingPage = () => {
               <p className="py-2 border-b mx-8">Planejamento</p>
               <p className="py-2 border-b mx-8">Crescimento Sustentável</p>
             </div>
-            <button className="bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3">
+            <a
+              href={linkWhatsapp}
+              target="_blank"
+              className="bg-[#00df9a] w-[200px] text-center rounded-md font-medium my-6 mx-auto px-6 py-3"
+              rel="noreferrer"
+            >
               Saiba Mais
-            </button>
+            </a>
           </div>
         </div>
       </div>
-
       {/* END CARDS  */}
 
       {/* FOOTEr  */}
-
-      <div className="max-w-[1240px] mx-auto text-white py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300">
+      <div
+        id="contacts"
+        className="max-w-[1240px] mx-auto section text-white py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300"
+      >
         <div>
-          <h1 className="w-full text-3xl font-bold text-[#00df9a]">REACT.</h1>
-          <p className="py-4">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit
-            ullam iste repellat consequatur libero reiciendis, blanditiis
-            accusantium.
-          </p>
+          <h1 className="w-full text-3xl font-bold text-[#00df9a]">
+            EcoManager.
+          </h1>
+          <p className="py-4">Nos contacte nos outros meios de comunicação</p>
           <div className="flex justify-between md:w-[75%] my-6">
             <FaFacebookSquare size={30} />
             <FaInstagram size={30} />
@@ -271,44 +322,39 @@ const LandingPage = () => {
         </div>
         <div className="lg:col-span-2 flex justify-between mt-6">
           <div>
-            <h6 className="font-medium text-gray-400">Solutions</h6>
+            <h6 className="font-medium text-gray-400">Soluções</h6>
             <ul>
-              <li className="py-2 text-sm">Analytics</li>
+              <li className="py-2 text-sm">Análises</li>
               <li className="py-2 text-sm">Marketing</li>
-              <li className="py-2 text-sm">Commerce</li>
-              <li className="py-2 text-sm">Insights</li>
+              <li className="py-2 text-sm">Benefícios</li>
             </ul>
           </div>
           <div>
-            <h6 className="font-medium text-gray-400">Support</h6>
+            <h6 className="font-medium text-gray-400">Suporte</h6>
             <ul>
-              <li className="py-2 text-sm">Pricing</li>
-              <li className="py-2 text-sm">Documentation</li>
-              <li className="py-2 text-sm">Guides</li>
-              <li className="py-2 text-sm">API Status</li>
+              <li className="py-2 text-sm">Valores</li>
+              <li className="py-2 text-sm">Guias</li>
+              <li className="py-2 text-sm">Feedback</li>
             </ul>
           </div>
           <div>
-            <h6 className="font-medium text-gray-400">Company</h6>
+            <h6 className="font-medium text-gray-400">Companhia</h6>
             <ul>
-              <li className="py-2 text-sm">About</li>
-              <li className="py-2 text-sm">Blog</li>
-              <li className="py-2 text-sm">Jobs</li>
-              <li className="py-2 text-sm">Press</li>
-              <li className="py-2 text-sm">Careers</li>
+              <li className="py-2 text-sm">Sobre</li>
+              <li className="py-2 text-sm">Vagas</li>
+              <li className="py-2 text-sm">Serviços</li>
             </ul>
           </div>
           <div>
-            <h6 className="font-medium text-gray-400">Legal</h6>
+            <h6 className="font-medium text-gray-400">Parceiros</h6>
             <ul>
-              <li className="py-2 text-sm">Claim</li>
-              <li className="py-2 text-sm">Policy</li>
-              <li className="py-2 text-sm">Terms</li>
+              <li className="py-2 text-sm">Uni-Facef</li>
+              <li className="py-2 text-sm">Unifacef Junior</li>
+              <li className="py-2 text-sm">Batucacef</li>
             </ul>
           </div>
         </div>
       </div>
-
       {/* END FOOTER  */}
     </>
   );

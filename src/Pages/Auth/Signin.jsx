@@ -35,7 +35,7 @@ const Signin = () => {
         </div>
 
         <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between">
-          <h1 className="text-xl text-[#060606] font-semibold">EcoSystem</h1>
+          <h1 className="text-xl text-[#060606] font-semibold">EcoManager</h1>
 
           <div className="w-full flex flex-col max-w-[550px]:">
             {/* {showRegister ? <Register /> : <Login />} */}
@@ -54,9 +54,9 @@ const Signin = () => {
 
           <div className="w-full flex items-center justify-center">
             <p className="text-sm font-normal text-[#060606]">
-              Developed by{" "}
+              Desenvolvido por{" "}
               <span className="font-semibold underline underline-offset-2 cursor-pointer">
-                Uni-facef students
+                EcoManager
               </span>
             </p>
           </div>

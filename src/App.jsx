@@ -51,12 +51,15 @@ import { Toaster } from "react-hot-toast";
 import Loader from "./Loader/Loader";
 import DefaultLayout from "./layouts/DefaultLayout";
 import Signin from "./Pages/Auth/Signin";
-import Index from "./Pages/Dashboard/Index";
+import Index from "./Pages/Energy/Index";
 import { useEffect, useState } from "react";
 import PageNotFound from "./layouts/PageNotFound";
 import { AuthProvider } from "./hooks/AuthContext";
 import LandingPage from "./Pages/LandingPage/Index";
 import Simulator from "./Pages/Simulator/Simulator";
+import Energy from "./Pages/Energy/Index";
+import Water from "./Pages/Water/Index";
+import Waste from "./Pages/Waste/Index";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -84,6 +87,15 @@ function App() {
           </Route>
           <Route path="/simulator" element={<DefaultLayout />}>
             <Route index element={<Simulator />} />
+          </Route>
+          <Route path="/energy" element={<DefaultLayout />}>
+            <Route index element={<Energy />} />
+          </Route>
+          <Route path="/water" element={<DefaultLayout />}>
+            <Route index element={<Water />} />
+          </Route>
+          <Route path="/waste" element={<DefaultLayout />}>
+            <Route index element={<Waste />} />
           </Route>
         </Routes>
       </AuthProvider>

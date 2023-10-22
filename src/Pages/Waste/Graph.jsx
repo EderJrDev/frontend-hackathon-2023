@@ -12,7 +12,7 @@ const ApexChart = () => {
       const token = secureLocalStorage.getItem("token");
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       const response = await api.get(
-        "energia/2bdf123f-f7d1-4e46-be18-b5247e6f0da0"
+        "residuos/2bdf123f-f7d1-4e46-be18-b5247e6f0da0"
       );
 
       // console.log(response.data);
@@ -25,7 +25,7 @@ const ApexChart = () => {
         if (!dadosAgrupadosPorHora[hora]) {
           dadosAgrupadosPorHora[hora] = 0;
         }
-        dadosAgrupadosPorHora[hora] += item.watts_mes.toFixed(2);
+        dadosAgrupadosPorHora[hora] += item.quantidade.toFixed(2);
       });
 
       // Converter dados para o formato necessário para o gráfico
@@ -33,7 +33,7 @@ const ApexChart = () => {
         const horaFormatada = format(new Date(item.createdAt), "HH:mm");
         return {
           x: horaFormatada, // Horário formatado
-          y: parseFloat(item.watts_mes.toFixed(2)), // Consumo de watts por hora com 2 casas decimais
+          y: parseFloat(item.quantidade.toFixed(2)), // Consumo de watts por hora com 2 casas decimais
         };
       });
 
@@ -62,7 +62,7 @@ const ApexChart = () => {
       curve: "smooth",
     },
     title: {
-      text: "Consumo de Watts por Hora",
+      text: "Descarte de copos por Mês",
       align: "left",
       style: {
         fontSize: "24px", // Tamanho do título
@@ -74,6 +74,7 @@ const ApexChart = () => {
       type: "category",
     },
     colors: ["#00df9a"], // Defina cores vibrantes para o gráfico
+
     fill: {
       type: "gradient", // Use gradientes para uma aparência mais viva
       gradient: {
@@ -87,7 +88,7 @@ const ApexChart = () => {
 
   const series = [
     {
-      name: "Watts",
+      name: "Descartes",
       data: consumoPorHora,
     },
   ];

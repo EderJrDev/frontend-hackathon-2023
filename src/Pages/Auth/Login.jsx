@@ -74,7 +74,7 @@ const Login = () => {
         <div className="w-full flex items-center justify-between">
           <div className="w-full flex items-center">
             <input type="checkbox" className="w-4 h-4 mr-2" />
-            <p className="text-sm">Remenber Me </p>
+            <p className="text-sm">Lembre de Mim </p>
           </div>
           <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
             Esqueci a Senha
@@ -84,14 +84,14 @@ const Login = () => {
         <div className="w-full flex flex-col my-4">
           <button
             type="submit"
-            className="w-full text-white mt-2 font-semibold bg-[#060606] rounded-md p-4 text-center justify-center"
+            className="w-full text-black mt-2 font-semibold bg-[#00df9a] border-boxdark-2 rounded-md p-4 text-center justify-center"
           >
             Entrar
           </button>
 
           <button
             onClick={() => setIsRegistered(false)}
-            className="w-full text-[#060606] font-semibold bg-white mt-3 border-2 border-black rounded-md p-4 text-center justify-center"
+            className="w-full text-black font-semibold bg-white mt-3 border-2 border-black rounded-md p-4 text-center justify-center"
           >
             Cadastrar
           </button>
