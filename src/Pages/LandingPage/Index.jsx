@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import Typed from "react-typed";
 import "./index.css";
 // import Single from '../assets/single.png'
 // import Double from '../assets/double.png'
 // import Triple from '../assets/triple.png'
-import {
-  FaDribbbleSquare,
-  FaFacebookSquare,
-  FaGithubSquare,
-  FaInstagram,
-  FaTwitterSquare,
-} from "react-icons/fa";
+// import {
+//   FaDribbbleSquare,
+//   FaFacebookSquare,
+//   FaGithubSquare,
+//   FaInstagram,
+//   FaTwitterSquare,
+// } from "react-icons/fa";
 import Modal from "../../components/Modal";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -76,6 +75,27 @@ const LandingPage = () => {
   const numeroWhatsapp = "16997328376";
 
   const linkWhatsapp = `https://wa.me/55${numeroWhatsapp}`;
+
+  const [palavra, setPalavra] = useState("");
+  const palavras = ["sustentável", "ecológica", "saudável"];
+  const [indicePalavra, setIndicePalavra] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const palavraAtual = palavras[indicePalavra];
+      if (palavra === palavraAtual) {
+        setTimeout(() => {
+          let novaIndicePalavra = (indicePalavra + 1) % palavras.length;
+          setIndicePalavra(novaIndicePalavra);
+        }, 1000); // Aguarda 1 segundo antes de mudar para a próxima palavra
+      } else {
+        const novaPalavra = palavraAtual.substring(0, palavra.length + 1);
+        setPalavra(novaPalavra);
+      }
+    }, 200); // Altera a palavra a cada 0.2 segundos
+
+    return () => clearInterval(interval);
+  }, [palavra, indicePalavra, palavras]);
 
   return (
     <>
@@ -207,13 +227,14 @@ const LandingPage = () => {
             <p className="md:text-5xl sm:text-4xl text-xl font-bold py-4">
               Torne sua empresa
             </p>
-            <Typed
-              className="md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2 text-[#00df9a]"
-              strings={["sustentável", "ecológica", "saudável"]}
-              typeSpeed={120}
-              backSpeed={140}
-              loop
-            />
+            {/* <div className="md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2 text-[#00df9a]">
+              <p>sustentável</p>
+              <p>ecológica</p>
+              <p>saudável</p>
+            </div> */}
+            <div className="md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2 text-[#00df9a]">
+              <p>{palavra}</p>
+            </div>
           </div>
           <p className="md:text-2xl text-xl font-bold text-gray-500">
             Um sistema completo para a saúde ambiental da sua companhia!
@@ -336,13 +357,7 @@ const LandingPage = () => {
             EcoManager.
           </h1>
           <p className="py-4">Nos contacte nos outros meios de comunicação</p>
-          <div className="flex justify-between md:w-[75%] my-6">
-            <FaFacebookSquare size={30} />
-            <FaInstagram size={30} />
-            <FaTwitterSquare size={30} />
-            <FaGithubSquare size={30} />
-            <FaDribbbleSquare size={30} />
-          </div>
+          <div className="flex justify-between md:w-[75%] my-6"></div>
         </div>
         <div className="lg:col-span-2 flex justify-between mt-6">
           <div>

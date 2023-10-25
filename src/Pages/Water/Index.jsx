@@ -48,13 +48,13 @@ const Water = () => {
         <Card1
           className="bg-[#fcf4ff]"
           heading="Litros Consumidos por Mês"
-          description={`O consumo de watts por mês foi de ${cardInfos.litros_mes}`}
+          description={`O consumo de água por mês foi de ${cardInfos.litros_mes}`}
           icon={<Drop size="2.5rem" className="text-[#73c93a]" />}
         />
         <Card1
           className="bg-[#fefaf0]"
           heading="Litros Consumidos por Dia"
-          description={`O consumo de watts por dia foi de ${cardInfos.litros_dia}`}
+          description={`O consumo de água por dia foi de ${cardInfos.litros_dia}`}
           icon={<Drop size="2.5rem" className="text-[#b940ff]" />}
         />
         <Card1

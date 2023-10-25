@@ -31,7 +31,7 @@ const Waste = () => {
 
       const ultimoObjeto = response.data[response.data.length - 1];
 
-      console.log(ultimoObjeto);
+      // console.log(ultimoObjeto);
       setCardInfos(ultimoObjeto);
     } catch (e) {
       console.log(e);
@@ -48,13 +48,13 @@ const Waste = () => {
         <Card1
           className="bg-[#fcf4ff]"
           heading="Nome do último resíduo"
-          description={`O consumo de watts por mês foi de ${cardInfos.nome}`}
+          description={`O descarte de resíduos por mês foi de ${cardInfos.nome}`}
           icon={<Trash size="2.5rem" className="text-[#cf40c3]" />}
         />
         <Card1
           className="bg-[#fefaf0]"
           heading="Quantidade gasta por Dia"
-          description={`O consumo de watts por dia foi de ${cardInfos.quantidade}`}
+          description={`O descarte de resíduos por dia foi de ${cardInfos.quantidade}`}
           icon={<Trash size="2.5rem" className="text-[#40ffd6]" />}
         />
         <Card1
